@@ -26,15 +26,39 @@
 
 .stats {
     padding: 30px;
-    display: flex;
     width: 100vw;
-    gap: 100px;
+    height: 60vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 3fr 1fr;
+    grid-template-areas:
+        "trainDisplay  icons"
+        "trainDisplay  buttons";
+    gap: 50px;
 
     .display-train-total {
-        width: calc(50vw - 80px);
-        height: 50vh;
+        // width: calc(50vw - 80px);
+        // height: 50vh;
         background-color: aquamarine;
         padding-bottom: 0;
+        grid-area: trainDisplay;
+    }
+
+    .stats-icons {
+        grid-area: icons;
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .stats-buttons {
+        grid-area: buttons;
+        display: flex;
+        gap: 30px;
+
+        button {
+            padding: 5px 50px;
+        }
     }
 }
 

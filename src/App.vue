@@ -49,7 +49,7 @@ const totalSpeed = computed(() => (trainsSpeed.value + fuelSpeed.value + carsSpe
 
  //Håndterer opdateringerne fra emit når der bliver trykket på knapperne
  const handleTrainsSpeed = (speed) => {
-  fuelSpeed.value = speed;
+  trainsSpeedSpeed.value = speed;
  }; 
 
  const handleFuelSpeed = (speed) => {
@@ -77,6 +77,21 @@ function closeModal() {
   isModalOpen.value = false
 }
 
+// Genstartsknap
+const restart = () => {
+  trainsWeight.value = 0;
+  fuelWeight.value = 0;
+  carsWeight.value = 0;
+  extraWeight.value = 0;
+
+  trainsSpeed.value = 0;
+  fuelSpeed.value = 0;
+  carsSpeed.value = 0;
+  extraSpeed.value = 0;
+
+  isModalOpen.value = false;
+};
+
 </script>
 
 <template>
@@ -101,14 +116,18 @@ function closeModal() {
       width ="50">
     </div>
     </div>
-    <button @click="openModal" class="testBtn">TEST</button>
+    <div class="stats-buttons">
+       <button @click="openModal"> TEST</button>
+       <button @click="restart">Prøv igen</button>
+    </div>
+   
   </div>
 
 <!-- RESULTAT modal -->
     <div v-if="isModalOpen" class="modal-overlay">
       <div class="modal-content">
         <h2> Du har kørt {{ totalPoints }} kilometer!</h2>
-        <button @click="closeModal">Luk</button>
+        <button @click="restart">Prøv igen</button>
       </div>
     </div>
 
@@ -118,8 +137,5 @@ function closeModal() {
     <GetFuelComponent @update-speed="handleFuelSpeed" @update-weight="handleFuelWeight"/>
     <getCarsComponent @update-speed="handleCarsSpeed" @update-weight="handleCarsWeight"/>
     <GetExtrasComponent @update-speed="handleExtraSpeed" @update-weight="handleExtraWeight"/>
-
-
   </div>
 </template>
-
