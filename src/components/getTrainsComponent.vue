@@ -1,62 +1,59 @@
 <script setup>
+import { ref, watch } from 'vue'; 
 
-import {ref} from 'vue'; 
-
-const trains = ref([]); //Tomt array den indhentede data bliver sat ind i 
-const currentIndex = ref(0); //For at tracke hvilken placering vi står på i arrayet 
+const trains = ref([]); 
+const currentIndex = ref(0); 
+const emit = defineEmits(['update-weight'])
 
 const getTrains = () => {
-    //Udsender et promise, der enten returnerer 200 eller med fejl. 
-fetch('https://koblingerne-bf202-default-rtdb.europe-west1.firebasedatabase.app/trains.json', {
-method: 'GET',
-})
-//Hvis 200, konverter data til .json formati
-.then((res) => {
-  return res.json();
-})
-//For hvert json object (key), tag indholdet og push til array. 
-.then((res) => {
-  const trainsKeys = Object.keys(res); 
-  for (let i in trainsKeys) {
-    trains.value.push({
-      ...res[trainsKeys[i]],
-      id: trainsKeys[i],
+  fetch('https://koblingerne-bf202-default-rtdb.europe-west1.firebasedatabase.app/trains.json')
+    .then((res) => res.json())
+    .then((res) => {
+      const trainsKeys = Object.keys(res); 
+      for (let i in trainsKeys) {
+        trains.value.push({
+          ...res[trainsKeys[i]],
+          id: trainsKeys[i],
+        });
+      }
+
+      // Emit initial weight
+      if (trains.value.length > 0) {
+        emit('update-weight', trains.value[currentIndex.value].trainsWeight)
+        emit('update-speed', trains.value[currentIndex.value].trainsSpeed); 
+      }
+    })
+    .catch((err) => {
+      console.error(err);
     });
-  }
-})
-//Fejlhåndtering
-.catch((err) => {
-  console.error(err);
-});
 };
 
-//kalder funktionen 
 getTrains();
 
-const nextBtn = () => {
-    if (currentIndex.value >= trains.value.length -1) {
-        currentIndex.value = 0; 
-    } else {
-        currentIndex.value++;
-    }
-};
+watch(currentIndex, (newIndex) => {
+  if (trains.value.length > 0) {
+    emit('update-weight', trains.value[newIndex].trainsWeight);
+    emit('update-speed', trains.value[currentIndex.value].trainsSpeed); 
+  }
+});
 
+const nextBtn = () => {
+  currentIndex.value = (currentIndex.value + 1) % trains.value.length;
+};
 
 const previousBtn = () => {
-  if (currentIndex.value <= 0) {
-    currentIndex.value = trains.value.length - 1;
-  } else {
-    currentIndex.value--;
-  }
+  currentIndex.value =
+    currentIndex.value <= 0 ? trains.value.length - 1 : currentIndex.value - 1;
 };
+
 
 
 </script>
 
 <template>
-   <div v-if="trains.length > 0">
-    <p>{{ trains[currentIndex].trainName }}</p>
-    <button @click="nextBtn"> Next Train</button>
-    <button @click="previousBtn"> Previous Train</button>
-   </div>
+  <div v-if="trains.length > 0">
+    <button @click="previousBtn">Previous train</button>
+    <img :src="trains[currentIndex].imgURL" alt="Togbillede">
+    <button @click="nextBtn">Next train</button>
+  </div>
 </template>

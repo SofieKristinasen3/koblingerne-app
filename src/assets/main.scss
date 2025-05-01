@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.trainpart-selection-element {
+    padding: 0px 30px 30px 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    div {
+        width: 20%;
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+
+        img {
+            height: 80%;
+            object-fit: contain;
+        }
+    }
+
+}
+
+.stats {
+    padding: 30px;
+    display: flex;
+    width: 100vw;
+    gap: 100px;
+
+    .display-train-total {
+        width: calc(50vw - 80px);
+        height: 50vh;
+        background-color: aquamarine;
+        padding-bottom: 0;
+    }
+
+}
