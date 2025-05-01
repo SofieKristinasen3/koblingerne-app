@@ -41,13 +41,11 @@ const fuelSpeed = ref(0);
 const carsSpeed = ref(0); 
 const extraSpeed = ref(0); 
 
-
 const totalSpeed = computed(() => (trainsSpeed.value + fuelSpeed.value + carsSpeed.value + extraSpeed.value)); 
  const iconCountSpeed = computed(() => {
   const step = 2;
   return Math.min(5, Math.floor(totalSpeed.value / step));  
  }); 
-
 
  //Håndterer opdateringerne fra emit når der bliver trykket på knapperne
  const handleTrainsSpeed = (speed) => {
@@ -68,8 +66,16 @@ const totalSpeed = computed(() => (trainsSpeed.value + fuelSpeed.value + carsSpe
 
  
 //RESULTATSIDE
-const totalPoints = computed (() => totalWeight.value + totalSpeed.value * 100)
+const totalPoints = computed (() => totalWeight.value + totalSpeed.value * 100);
+const isModalOpen = ref(false)
 
+function openModal() {
+  isModalOpen.value = true
+}
+
+function closeModal() {
+  isModalOpen.value = false
+}
 
 </script>
 
@@ -95,15 +101,24 @@ const totalPoints = computed (() => totalWeight.value + totalSpeed.value * 100)
       width ="50">
     </div>
     </div>
-</div>
+    <button @click="openModal" class="testBtn">TEST</button>
+  </div>
 
+<!-- RESULTAT modal -->
+    <div v-if="isModalOpen" class="modal-overlay">
+      <div class="modal-content">
+        <h2> Du har kørt {{ totalPoints }} kilometer!</h2>
+        <button @click="closeModal">Luk</button>
+      </div>
+    </div>
+
+<!-- Selector elementer -->
   <div class="trainpart-selection-element">
     <GetTrainsComponent @update-speed="handleTrainsSpeed" @update-weight="handleTrainsWeight"/>
     <GetFuelComponent @update-speed="handleFuelSpeed" @update-weight="handleFuelWeight"/>
     <getCarsComponent @update-speed="handleCarsSpeed" @update-weight="handleCarsWeight"/>
     <GetExtrasComponent @update-speed="handleExtraSpeed" @update-weight="handleExtraWeight"/>
 
-    <h1> Du har kørt {{ totalPoints }} kilometer! </h1>
 
   </div>
 </template>
