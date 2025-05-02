@@ -3,7 +3,7 @@ import { ref, watch } from 'vue';
 
 const fuel = ref([]); 
 const currentIndex = ref(0); 
-const emit = defineEmits(['update-weight'])
+const emit = defineEmits(['update-weight', 'update-speed'])
 
 const getFuel = () => {
   fetch('https://koblingerne-bf202-default-rtdb.europe-west1.firebasedatabase.app/fuel.json')
@@ -43,8 +43,9 @@ const nextBtn = () => {
 
 const previousBtn = () => {
   currentIndex.value =
-    currentIndex.value <= 0 ? fuel.value.length - 1 : currentIndex.value - 1;
+    (currentIndex.value - 1 + trains.value.length) % trains.value.length;
 };
+
 </script>
 
 <template>

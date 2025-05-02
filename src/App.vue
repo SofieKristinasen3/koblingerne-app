@@ -43,13 +43,13 @@ const extraSpeed = ref(0);
 
 const totalSpeed = computed(() => (trainsSpeed.value + fuelSpeed.value + carsSpeed.value + extraSpeed.value)); 
  const iconCountSpeed = computed(() => {
-  const step = 2;
+  const step = 3.5;
   return Math.min(5, Math.floor(totalSpeed.value / step));  
  }); 
 
  //Håndterer opdateringerne fra emit når der bliver trykket på knapperne
  const handleTrainsSpeed = (speed) => {
-  trainsSpeedSpeed.value = speed;
+  trainsSpeed.value = speed;
  }; 
 
  const handleFuelSpeed = (speed) => {
