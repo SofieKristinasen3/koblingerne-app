@@ -43,7 +43,7 @@ const nextBtn = () => {
 
 const previousBtn = () => {
   currentIndex.value =
-    (currentIndex.value - 1 + trains.value.length) % trains.value.length;
+    (currentIndex.value - 1 + fuel.value.length) % fuel.value.length;
 };
 
 </script>
