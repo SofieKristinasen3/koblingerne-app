@@ -1,28 +1,60 @@
+$White_primary: #f9f9f9;
+$Black_primary: #000103;
+$beige_primary: #FFEEDF;
+$beige_secondary: #FFDBC2;
+$yellow_primary: #e8c546;
+$green_primary: #118e53;
+$red_primary: #de1f2c;
+$lightblue_secondary: #4876ef;
+$darkblue_primary: #071742;
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Freeman", sans-serif;
 }
 
 body {
-    background-color: white;
+    background-color: $beige_primary;
+}
+
+h2 {
+    font-size: 2.5rem;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: $Black_primary;
+    color: $darkblue_primary;
 }
 
 .trainpart-selection-element {
-    padding: 0px 30px 30px 30px;
+    margin: 30px;
+    margin-top: 0px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 
+
     div {
-        width: 20%;
+        width: 23%;
         height: 300px;
+
         display: flex;
         flex-direction: column;
 
         img {
+            min-height: 220px;
             height: 80%;
             object-fit: contain;
+            background-color: $beige_secondary;
+            border-radius: 15px;
+            padding: 10px;
+        }
+
+        .arrow {
+            min-height: 50px;
+            max-height: 50px;
+            background-color: $beige_primary;
+            padding: 0;
         }
     }
 
@@ -30,8 +62,9 @@ body {
 
 .stats {
     padding: 30px;
+    padding-bottom: 5px;
     width: 100vw;
-    height: 60vh;
+    height: 55vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 3fr 1fr;
@@ -43,7 +76,7 @@ body {
     .display-train-total {
         // width: calc(50vw - 80px);
         // height: 50vh;
-        background-color: aquamarine;
+        background-color: $beige_secondary;
         padding-bottom: 0;
         grid-area: trainDisplay;
     }
@@ -59,10 +92,30 @@ body {
         grid-area: buttons;
         display: flex;
         gap: 30px;
+    }
 
-        button {
-            padding: 5px 50px;
-        }
+    button {
+        padding: 5px 50px;
+        min-width: 20vw;
+        min-height: 50px;
+        font-size: 2.5rem;
+        color: $White_primary;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: $Black_primary;
+        border-radius: 8px;
+    }
+
+    button:hover {
+        opacity: 0.9;
+        rotate: 5deg;
+    }
+
+    .testBtn {
+        background-color: $green_primary;
+    }
+
+    .restartBtn {
+        background-color: $red_primary;
     }
 }
 

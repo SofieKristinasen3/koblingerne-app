@@ -115,7 +115,7 @@ const restart = () => {
     <!-- style siger, at hvis n er mindre end eller lig med iconCountWeight, skal opaciteten være 1. Ellers skal de være 0.2. -->
 
     <div class="icons">
-      <H2>FART</H2>
+      <h2>FART</h2>
       <img v-for="n in 5"
       :key="n"
       src="./components/icons/speed.svg" alt=""
@@ -124,10 +124,10 @@ const restart = () => {
     </div>
     </div>
     <div class="stats-buttons">
-       <button @click="openModal"> TEST</button>
-       <button @click="restart">Prøv igen</button>
+       <button @click="openModal" class="testBtn"><h3>TEST</h3></button>
+       <button @click="restart" class="restartBtn"><h3>IGEN</h3></button>
     </div>
-   
+    
   </div>
 
 <!-- RESULTAT modal -->

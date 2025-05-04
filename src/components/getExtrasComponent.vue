@@ -50,9 +50,9 @@ const previousBtn = () => {
 
 <template>
   <div v-if="extra.length > 0">
-    <button @click="previousBtn">Previous extra</button>
+    <img src="./icons/up-arrow.svg" alt="" @click="previousBtn" class="arrow">
     <img :src="extra[currentIndex].imgUrl" alt="accessories">
-    <button @click="nextBtn">Next Extra</button>
+    <img src="./icons/down-arrow.svg" alt="" @click="nextBtn" class="arrow">
     
   </div>
 </template>
