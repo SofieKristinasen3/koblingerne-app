@@ -3,7 +3,7 @@ import { ref, watch } from 'vue';
 
 const extra = ref([]); 
 const currentIndex = ref(0); 
-const emit = defineEmits(['update-weight', 'update-speed'])
+const emit = defineEmits(['update-weight', 'update-speed', 'update-image'])
 
 const getExtra = () => {
   fetch('https://koblingerne-bf202-default-rtdb.europe-west1.firebasedatabase.app/extra.json')
@@ -20,7 +20,8 @@ const getExtra = () => {
       // Emit initial weight
       if (extra.value.length > 0) {
         emit('update-weight', extra.value[currentIndex.value].extraWeight); 
-        emit('update-speed', extra.value[currentIndex.value].extraSpeed); 
+        emit('update-speed', extra.value[currentIndex.value].extraSpeed);
+        emit('update-image', extra.value[currentIndex.value].viewerURL); 
       }
     })
     .catch((err) => {
@@ -34,6 +35,7 @@ watch(currentIndex, (newIndex) => {
   if (extra.value.length > 0) {
     emit('update-weight', extra.value[newIndex].extraWeight);
     emit('update-speed', extra.value[currentIndex.value].extraSpeed); 
+    emit('update-image', extra.value[currentIndex.value].viewerURL); 
   }
 });
 

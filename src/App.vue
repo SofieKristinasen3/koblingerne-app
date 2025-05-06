@@ -72,6 +72,10 @@ const totalSpeed = computed(() => (trainsSpeed.value + fuelSpeed.value + carsSpe
  
 //RESULTATSIDE
 const totalPoints = computed (() => totalWeight.value + totalSpeed.value * 100);
+const starsCount = computed(() => {
+  const step = 350; 
+  return Math.max(1, Math.min(5, Math.floor(totalPoints.value / step)));
+}); 
 const isModalOpen = ref(false) //Ved at skifte false/true vises modalen
 
 function openModal() {
@@ -97,11 +101,28 @@ const restart = () => {
   isModalOpen.value = false;
 };
 
+//VIEWER - se sammensætningen af dit tog 
+const trainViewer = ref('');
+const extraViewer = ref(''); //Modtager URL fra emit og indsætter i variabel trainViewer
+
+const handleTrainViewer = (imageUrl) => {
+  trainViewer.value = imageUrl;
+};
+const handleExtraViewer = (imageUrl) => {
+  extraViewer.value = imageUrl;
+};
+
+
+
 </script>
 
 <template>
   <div class="stats">
-    <div class="display-train-total"></div>
+    <div class="display-train-total" >
+      <img v-if="trainViewer" :src="trainViewer" alt="Tog billede" class="stacked-image"/>
+      <img v-if="extraViewer" :src="extraViewer" alt="Accessory" class="stacked-image"/>
+    </div>
+
     <div class="stats-icons">
       <div class="icons">
       <h2>VÆGT</h2>
@@ -133,16 +154,23 @@ const restart = () => {
 <!-- RESULTAT modal -->
     <div v-if="isModalOpen" class="modal-overlay">
       <div class="modal-content">
-        <h2> Du har kørt {{ totalPoints }} kilometer!</h2>
-        <button @click="restart">Prøv igen</button>
+        <h3> DU HAR KØRT {{ totalPoints }} KILOMETER!</h3>
+        <div class="stars">
+          <img v-for="n in starsCount"
+            :key="n"
+            src="./components/icons/star.svg"
+            alt=""
+            width="50">
+        </div>
+        <button @click="closeModal">Prøv igen</button>
       </div>
     </div>
 
 <!-- Selector elementer -->
   <div class="trainpart-selection-element">
-    <GetTrainsComponent @update-speed="handleTrainsSpeed" @update-weight="handleTrainsWeight"/>
+    <GetTrainsComponent @update-speed="handleTrainsSpeed" @update-weight="handleTrainsWeight" @update-image="handleTrainViewer"/>
     <GetFuelComponent @update-speed="handleFuelSpeed" @update-weight="handleFuelWeight"/>
     <getCarsComponent @update-speed="handleCarsSpeed" @update-weight="handleCarsWeight"/>
-    <GetExtrasComponent @update-speed="handleExtraSpeed" @update-weight="handleExtraWeight"/>
+    <GetExtrasComponent @update-speed="handleExtraSpeed" @update-weight="handleExtraWeight" @update-image="handleExtraViewer"/>
   </div>
 </template>

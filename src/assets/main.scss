@@ -56,6 +56,11 @@ h2 {
             background-color: $beige_primary;
             padding: 0;
         }
+
+        .arrow:hover {
+            opacity: 0.8;
+            translate: 0px -3px;
+        }
     }
 
 }
@@ -79,6 +84,15 @@ h2 {
         background-color: $beige_secondary;
         padding-bottom: 0;
         grid-area: trainDisplay;
+        position: relative;
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 70%;
+            height: auto;
+        }
     }
 
     .stats-icons {
@@ -106,7 +120,7 @@ h2 {
     }
 
     button:hover {
-        opacity: 0.9;
+        opacity: 0.8;
         rotate: 5deg;
     }
 
@@ -132,9 +146,41 @@ h2 {
 }
 
 .modal-content {
-    background: white;
+    background: $beige_primary;
     padding: 1.5rem;
     border-radius: 8px;
-    max-width: 400px;
+    border-color: $beige_secondary;
+    max-width: 90%;
     width: 90%;
+    display: grid;
+    justify-content: center;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: 'h3'
+        'stars'
+        'button';
+    align-items: center;
+    justify-items: center;
+
+    h3 {
+        grid-area: 'h3';
+        font-size: 2.5rem;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: $Black_primary;
+        color: $green_primary;
+        letter-spacing: 5%;
+
+    }
+
+    .stars {
+        grid-area: 'stars';
+
+        :nth-child(even) {
+            translate: 0px 20px;
+        }
+    }
+
+    button {
+        grid-area: 'button';
+    }
 }

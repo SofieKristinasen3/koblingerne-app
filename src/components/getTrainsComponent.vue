@@ -10,7 +10,7 @@ const trains = ref([]);
 const currentIndex = ref(0); 
 //defineEmits gør os i stand til at sende data "opad" til en parent file. 
 //Her bliver det defineret, at den skal sende den data der er indeni "update-weight"
-const emit = defineEmits(['update-weight', 'update-speed'])
+const emit = defineEmits(['update-weight', 'update-speed', 'update-image'])
 
 //Funktion til at hente data fra firebase, her .trains specifikt  
 const getTrains = () => {
@@ -37,6 +37,8 @@ const getTrains = () => {
       if (trains.value.length > 0) { //Hvis listen ikke er tom, udfør:
         emit('update-weight', trains.value[currentIndex.value].trainsWeight) //sender data op til parent komponent, med værdier for togvægt og hastighed
         emit('update-speed', trains.value[currentIndex.value].trainsSpeed); 
+        emit('update-image', trains.value[currentIndex.value].viewerURL);
+
       }
     })
     //Fejlhåndtering
@@ -52,6 +54,8 @@ watch(currentIndex, (newIndex) => {
   if (trains.value.length > 0) {
     emit('update-weight', trains.value[newIndex].trainsWeight);
     emit('update-speed', trains.value[currentIndex.value].trainsSpeed)
+    emit('update-image', trains.value[currentIndex.value].viewerURL);
+
   }
 });
 
