@@ -79,8 +79,6 @@ h2 {
     gap: 50px;
 
     .display-train-total {
-        // width: calc(50vw - 80px);
-        // height: 50vh;
         background-color: $beige_secondary;
         padding-bottom: 0;
         grid-area: trainDisplay;
@@ -132,6 +130,37 @@ h2 {
         background-color: $red_primary;
     }
 }
+
+
+@media only screen and (max-width: 600px) {
+    .stats {
+        width: 100vw;
+        height: 30vh;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 3fr 2fr 1fr;
+        grid-template-areas:
+            "trainDisplay"
+            "icons"
+            "buttons";
+        gap: 10px;
+        margin-bottom: 150px;
+
+        .display-train-total {
+
+            img {
+                position: absolute;
+                top: 0;
+                left: 175px;
+                width: 55%;
+            }
+        }
+    }
+
+
+
+}
+
 
 .modal-overlay {
     position: fixed;
