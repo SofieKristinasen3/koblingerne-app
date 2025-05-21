@@ -112,6 +112,8 @@ const handleExtraViewer = (imageUrl) => {
   extraViewer.value = imageUrl;
 };
 
+//Styrer hvad der kan ses på mobilversion 
+const selectedTab = ref('train');
 
 
 </script>
@@ -124,29 +126,27 @@ const handleExtraViewer = (imageUrl) => {
     </div>
 
     <div class="stats-icons">
-      <div class="icons">
-      <h2>VÆGT</h2>
+      <div class="weight">
       <!-- loop der genererer 5x af mit image tag. v-for starter loopet, n fungerer som tæller, og går op til 5. Key=n gør at vue ved hvor langt vi er-->
       <img v-for="n in 5" 
       :key="n" 
-      src="./components/icons/weight.svg" alt=""
+      src=".\components\icons\weight.png" alt=""
       :style="{opacity: n <= iconCountWeight ? 1 : 0.2}"
-      width ="50">
+      width ="65">
     </div>
     <!-- style siger, at hvis n er mindre end eller lig med iconCountWeight, skal opaciteten være 1. Ellers skal de være 0.2. -->
 
-    <div class="icons">
-      <h2>FART</h2>
+    <div class="speed">
       <img v-for="n in 5"
       :key="n"
-      src="./components/icons/speed.svg" alt=""
-      :style="{opacity: n <= iconCountSpeed ? 1 : 0.2}"
-      width ="50">
+      src="./components/icons/speed.png" alt=""
+      :style="{opacity: n <= iconCountSpeed ? 1 : 0.2} "
+      width ="65">
     </div>
     </div>
     <div class="stats-buttons">
-       <button @click="openModal" class="testBtn"><h3>TEST</h3></button>
-       <button @click="restart" class="restartBtn"><h3>IGEN</h3></button>
+       <button @click="openModal" class="testBtn"><img src=".\components\icons\checkmark.svg" alt=""></button>
+       <button @click="restart" class="restartBtn"><img src=".\components\icons\repeat.png" alt=""></button>
     </div>
     
   </div>
@@ -160,9 +160,10 @@ const handleExtraViewer = (imageUrl) => {
             :key="n"
             src="./components/icons/star.svg"
             alt=""
-            width="50">
+            width="100">
         </div>
-        <button @click="closeModal">Prøv igen</button>
+        <button @click="closeModal"><img src=".\components\icons\repeat.png" alt="">
+        </button>
       </div>
     </div>
 
@@ -173,4 +174,6 @@ const handleExtraViewer = (imageUrl) => {
     <getCarsComponent @update-speed="handleCarsSpeed" @update-weight="handleCarsWeight"/>
     <GetExtrasComponent @update-speed="handleExtraSpeed" @update-weight="handleExtraWeight" @update-image="handleExtraViewer"/>
   </div>
+
+  
 </template>

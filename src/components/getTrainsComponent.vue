@@ -76,8 +76,8 @@ const previousBtn = () => {
 
 <template>
   <div v-if="trains.length > 0">
-    <img src="./icons/up-arrow.svg" alt="" @click="previousBtn" class="arrow">
+    <img src="./icons/up-arrow.png" alt="" @click="previousBtn" class="arrow">
      <img :src="trains[currentIndex].imgURL" alt="Togbillede">
-    <img src="./icons/down-arrow.svg" alt="" @click="nextBtn" class="arrow">
+    <img src="./icons/down-arrow.png" alt="" @click="nextBtn" class="arrow">
   </div>
 </template>
