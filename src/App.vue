@@ -132,7 +132,7 @@ const selectedTab = ref('train');
       :key="n" 
       src=".\components\icons\weight.png" alt=""
       :style="{opacity: n <= iconCountWeight ? 1 : 0.2}"
-      width ="65">
+      width ="65px">
     </div>
     <!-- style siger, at hvis n er mindre end eller lig med iconCountWeight, skal opaciteten være 1. Ellers skal de være 0.2. -->
 
@@ -141,7 +141,7 @@ const selectedTab = ref('train');
       :key="n"
       src="./components/icons/speed.png" alt=""
       :style="{opacity: n <= iconCountSpeed ? 1 : 0.2} "
-      width ="65">
+      width ="65px">
     </div>
     </div>
     <div class="stats-buttons">
@@ -160,7 +160,7 @@ const selectedTab = ref('train');
             :key="n"
             src="./components/icons/star.svg"
             alt=""
-            width="100">
+            width="100px">
         </div>
         <button @click="closeModal"><img src=".\components\icons\repeat.png" alt="">
         </button>
